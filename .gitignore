@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS
+.DS_Store
+
+# Streamlit
+.streamlit/
+
+# TP outputs (légers mais pas nécessaires au dépôt)
+TP1/outputs/
+
+# SAM checkpoints / models
+TP1/models/
+*.pth
