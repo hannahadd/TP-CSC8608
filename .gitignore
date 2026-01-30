@@ -15,3 +15,7 @@ TP1/outputs/
 # SAM checkpoints / models
 TP1/models/
 *.pth
+
+# --- TP1: checkpoints/models (ne pas committer) ---
+TP1/models/*.pth
+TP1/models/
