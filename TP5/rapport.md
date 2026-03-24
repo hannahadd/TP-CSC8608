@@ -13,7 +13,7 @@ Vidéo de la télémétrie sauvegardée sous 'random_agent.gif'
 
 Un environnement est considéré “résolu” si le score moyen atteint **+200**. Ici, l’agent aléatoire obtient **-108.89** sur cet épisode, soit **308.89 points en dessous** du seuil. Il crash et consomme le carburant sans stratégie (moteur principal 17 fois, latéraux 37 fois).
 
-[text](reward_hacker.py)
+![alt text](random_agent.gif)
 
 ### Exercice 2:
 

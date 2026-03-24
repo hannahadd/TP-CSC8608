@@ -19,3 +19,7 @@ TP1/models/
 # --- TP1: checkpoints/models (ne pas committer) ---
 TP1/models/*.pth
 TP1/models/
+TP3/data/*.wav
+TP3/data/*.mp3
+TP3/data/*.m4a
+TP3/outputs/*.wav

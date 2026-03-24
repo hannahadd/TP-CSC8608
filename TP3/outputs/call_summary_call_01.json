@@ -1,0 +1,62 @@
+{
+  "audio_path": "TP3/data/call_01.wav",
+  "model_id": "openai/whisper-small",
+  "device": "cpu",
+  "audio_duration_s": 40.44,
+  "elapsed_s": 19.83529496192932,
+  "rtf": 0.4904870168627429,
+  "pii_stats": {
+    "emails": 1,
+    "phones": 0,
+    "orders": 0
+  },
+  "intent_scores": {
+    "refund_or_replacement": 2,
+    "delivery_issue": 5,
+    "general_support": 6
+  },
+  "intent": "general_support",
+  "top_terms": [
+    [
+      "thank",
+      2
+    ],
+    [
+      "calling",
+      2
+    ],
+    [
+      "number",
+      2
+    ],
+    [
+      "hello",
+      1
+    ],
+    [
+      "customer",
+      1
+    ],
+    [
+      "support",
+      1
+    ],
+    [
+      "name",
+      1
+    ],
+    [
+      "alex",
+      1
+    ],
+    [
+      "will",
+      1
+    ],
+    [
+      "help",
+      1
+    ]
+  ],
+  "redacted_text": "hello, thank you 4 calling customer support.my name is alex and i will help you today.im calling about another.an order that arrived the match.the package was delivered.yesterday.but the screen is cracked.i would like 2 resound our replacement as soon as possible.the other number is ax.1, 9, 7, 3, 5.you can reach [REDACTED_EMAIL], my fun number is i 5501.thank you."
+}

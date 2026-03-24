@@ -1,0 +1,77 @@
+{
+  "audio_path": "TP3/data/call_01.wav",
+  "model_id": "openai/whisper-small",
+  "device": "cpu",
+  "audio_duration_s": 40.44,
+  "elapsed_s": 18.873703241348267,
+  "rtf": 0.46670878440524893,
+  "segments": [
+    {
+      "segment_id": 0,
+      "start_s": 1.762,
+      "end_s": 6.526,
+      "text": "Hello, thank you for calling customer support. My name is Alex and I will help you today."
+    },
+    {
+      "segment_id": 1,
+      "start_s": 6.754,
+      "end_s": 8.542,
+      "text": "I'm calling about another."
+    },
+    {
+      "segment_id": 2,
+      "start_s": 8.898,
+      "end_s": 12.702,
+      "text": "an order that arrived the match. The package was delivered."
+    },
+    {
+      "segment_id": 3,
+      "start_s": 12.866,
+      "end_s": 13.598,
+      "text": "yesterday."
+    },
+    {
+      "segment_id": 4,
+      "start_s": 13.794,
+      "end_s": 15.166,
+      "text": "but the screen is cracked."
+    },
+    {
+      "segment_id": 5,
+      "start_s": 15.522,
+      "end_s": 21.438,
+      "text": "I would like to resound our replacement as soon as possible. The other number is AX."
+    },
+    {
+      "segment_id": 6,
+      "start_s": 21.666,
+      "end_s": 27.134,
+      "text": "one, nine, seven, three, five. You can reach me at Jordan."
+    },
+    {
+      "segment_id": 7,
+      "start_s": 27.266,
+      "end_s": 27.966,
+      "text": "Smith."
+    },
+    {
+      "segment_id": 8,
+      "start_s": 29.506,
+      "end_s": 31.134,
+      "text": "example.com."
+    },
+    {
+      "segment_id": 9,
+      "start_s": 32.13,
+      "end_s": 36.094,
+      "text": "Also, my fun number is I5501."
+    },
+    {
+      "segment_id": 10,
+      "start_s": 36.29,
+      "end_s": 37.854,
+      "text": "Thank you."
+    }
+  ],
+  "full_text": "Hello, thank you for calling customer support. My name is Alex and I will help you today. I'm calling about another. an order that arrived the match. The package was delivered. yesterday. but the screen is cracked. I would like to resound our replacement as soon as possible. The other number is AX. one, nine, seven, three, five. You can reach me at Jordan. Smith. example.com. Also, my fun number is I5501. Thank you."
+}
