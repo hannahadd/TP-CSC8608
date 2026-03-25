@@ -1,0 +1,8 @@
+# TP4 — fichiers à ne pas versionner
+TP4/data/
+TP4/runs/
+__pycache__/
+*.pyc
+*.pt
+*.pth
+*.log
