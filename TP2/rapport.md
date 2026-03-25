@@ -1,9 +1,8 @@
 # TP2 — Génération d'image par diffusion (e-commerce)
 
-**Auteur :** [Ton prénom / nom]  
-**Date :** 2025  
+**Auteur :** Hanna Haddaoui
 **Modèle utilisé :** `stable-diffusion-v1-5/stable-diffusion-v1-5`  
-**Cluster :** SLURM GPU 11GB (NVIDIA)
+**Exécution :** MacBook Air, CPU (torch.float32)
 
 ---
 
@@ -32,8 +31,9 @@ python smoke_test.py
 
 ### Observations
 
-Pas de problème OOM rencontré sur le cluster SLURM (GPU 11GB). L'`enable_attention_slicing()` est activé par précaution. La génération prend ~8 secondes sur CUDA fp16.
-
+Exécution sur CPU (Mac). Le safety checker a été désactivé (`safety_checker=None`) 
+suite à un téléchargement incomplet du cache — correctif : suppression du cache 
+corrompu et re-téléchargement (~3.4 GB). Génération ~5 min/image sur CPU.
 ---
 
 ## Exercice 2 — Pipeline factorisé + baseline
@@ -57,7 +57,7 @@ python experiments.py
 
 ### Image baseline
 
-> **`outputs/baseline.png`** — *(remplacer par capture réelle)*
+![alt text](image-5.png)
 
 ### Configuration affichée
 
@@ -101,8 +101,6 @@ python -c "from experiments import run_text2img_experiments; run_text2img_experi
 
 ### Grille de résultats
 
-*(Insérer ici les 6 captures après exécution — voir instructions en bas du rapport)*
-
 | run01 — Baseline | run02 — steps=15 | run03 — steps=50 |
 |---|---|---|
 | ![run01](outputs/t2i_run01_baseline.png) | ![run02](outputs/t2i_run02_steps15.png) | ![run03](outputs/t2i_run03_steps50.png) |
@@ -113,19 +111,26 @@ python -c "from experiments import run_text2img_experiments; run_text2img_experi
 
 ### Analyse qualitative
 
-**Effet de `num_inference_steps` (runs 01–03) :**
-- **steps=15 (run02)** : image plus grossière, moins de détails sur la texture du cuir, fond légèrement bruité. La composition globale reste correcte mais les détails fins (coutures, reflets) manquent. Acceptable pour du prototypage rapide.
-- **steps=30 (run01 baseline)** : bon équilibre qualité/temps. Détails du sac (coutures, reflets) nets, fond propre et uniforme.
-- **steps=50 (run03)** : gain marginal par rapport à 30. Texture légèrement plus fine sur les bords, difficilement perceptible à l'œil nu. Le surcoût en temps (~60%) n'est pas justifié pour le e-commerce courant.
+strength=0.35 (run07) :
 
-**Effet de `guidance_scale` (runs 01, 04, 05) :**
-- **guidance=4.0 (run04)** : image plus "libre", moins contrainte par le prompt. Fond moins blanc, zones grises/colorées parasites. Le sac est reconnaissable mais l'aspect "studio photo" est affaibli.
-- **guidance=7.5 (run01)** : fidélité au prompt correcte, fond blanc propre, composition équilibrée.
-- **guidance=12.0 (run05)** : sur-contrainte visible — contours hyper-nets mais artefacts apparaissent (saturation excessive, ombres trop marquées, vignettage). L'image peut sembler "plastifiée" et peu naturelle.
+Conservé : la silhouette du sac noir, le cadrage, les proportions générales.
+Modifié : le fond est légèrement retravaillé, l'éclairage affiné. Le résultat reste proche de la source mais la petite résolution de l'image d'entrée (183px) limite la qualité finale — le fond est bruité.
+E-commerce : utilisable uniquement si l'image source est de bonne résolution. Ici le résultat est trop dégradé pour une publication directe.
 
-**Effet du scheduler (run01 vs run06 — DDIM) :**
-- **EulerA (run01)** : rendu plus naturel et organique, légère variabilité stochastique. Bien adapté aux textures de produits (cuir, tissu).
-- **DDIM (run06)** : déterministe, rendu plus lisse/clinique. Moins de "bruit naturel", ce qui peut avantager les fonds unis mais rend les textures produit légèrement moins réalistes.
+strength=0.60 (run08) :
+
+Le modèle a tenté de réconcilier l'image source (sac noir) avec le prompt ("sneaker") — résultat : une image complètement hallucinée, couleurs psychédéliques (bleu, vert, jaune), forme du produit perdue.
+Ce cas illustre un piège concret : si le prompt ne correspond pas à l'image source, à strength intermédiaire le modèle produit quelque chose d'incohérent plutôt que de choisir l'un ou l'autre.
+E-commerce : inutilisable.
+
+strength=0.85 (run09) :
+
+Résultat encore plus abstrait que run08, aucun élément produit identifiable.
+À ce niveau de strength le modèle ignore presque totalement la source — ce qui aurait pu fonctionner avec un prompt cohérent, mais ici amplifie juste l'hallucination.
+E-commerce : inutilisable.
+
+
+Conclusion : Ces trois runs montrent surtout l'importance de deux prérequis en img2img — une image source de résolution suffisante (≥ 512px) et un prompt qui correspond à ce que représente réellement la source. Sans ça, même strength=0.35 donne des résultats exploitables mais limités.
 
 ---
 
@@ -133,7 +138,7 @@ python -c "from experiments import run_text2img_experiments; run_text2img_experi
 
 ### Image source
 
-> *Placer une photo produit dans `TP2/inputs/my_product.jpg` (sneaker, sac, etc.)*
+![alt text](image-4.png)
 
 ### Plan des runs
 
@@ -195,7 +200,9 @@ streamlit run app.py
 
 **Mode Text2Img :**
 
-*(Insérer screenshot après lancement — voir instructions en bas)*
+Capture streamlit, generation de l'image
+
+![alt text](image-2.png)
 
 ```json
 {
@@ -212,7 +219,7 @@ streamlit run app.py
 
 **Mode Img2Img :**
 
-*(Insérer screenshot après lancement)*
+![alt text](image-1.png)
 
 ```json
 {
